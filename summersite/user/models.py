@@ -2,4 +2,14 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class MyUser(AbstractUser):
-    wechat_id = models.CharField(max_length=20, blank=False, unique=True)
+    wechat_id = models.CharField(
+        max_length=20, 
+        blank=False, 
+        unique=True, 
+        verbose_name='wechat',
+    )
+    is_tutor = models.BooleanField(
+        default=False, 
+        verbose_name='Tutor',
+        help_text="Designates whether the user is a tutor",
+    )
