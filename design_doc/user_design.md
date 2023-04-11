@@ -70,3 +70,5 @@ Fields of all users (创建账户时必填):
 - use `is_tutor` flag
 - 页面 register 时, 用下拉菜单勾选“是否为tutor”选项
 - 需要后台手动确认 tutor 账户
+- `tutor` 用户需要一个 nickname, 便于客服识别
+- `tutor` 用户需要添加 subject 域, 用于学科内检索
