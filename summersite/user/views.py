@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from .forms import MyUserCreationForm, MyUserChangeForm
+from django.urls import reverse_lazy
 
 # def base(request):
 #     return render(request, 'base.html', {})
@@ -14,9 +14,9 @@ from .forms import MyUserCreationForm, MyUserChangeForm
 
 
 def register(request):
-    return render(request, 'registration/register.html', {})
+    return render(request, 'registration/signup.html', {})
 
-class RegisterAccountView(CreateView):
+class SignUpView(CreateView):
     form_class = MyUserCreationForm
+    template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
-    template_name = 'registration/register.html'

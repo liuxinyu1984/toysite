@@ -22,9 +22,18 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" aria-current="page" href="#">Blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{% url 'join' %}">Join</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{% url 'signup' %}">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{% url 'login' %}">Log In</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
