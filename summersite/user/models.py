@@ -6,7 +6,8 @@ class MyUser(AbstractUser):
         max_length=20, 
         blank=False, 
         unique=True, 
-        verbose_name='wechat',
+        verbose_name='wechat ID',
+        help_text="Your Wechat/Weixin ID used to contact Look4Tutor service",
     )
     is_tutor = models.BooleanField(
         default=False, 
