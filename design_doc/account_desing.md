@@ -6,7 +6,7 @@
 
 `student` 用户 homepage:
 
-- courses:
+- my_study:
   - enrolled courses 及缴费状态
   - browse/select/drop courses
   - 提前招生占位课程
@@ -21,7 +21,7 @@
 
 `tutor` 用户 homepage:
 
-- courses:
+- my_teaching:
   - 目前所教课程入口
   - 已完结课程
 - announcement: look4 admin 群发消息
