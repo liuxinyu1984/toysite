@@ -5,9 +5,11 @@
 
 <h1>Welcome back,  {{ username }}</h1>
 <ul>
+    {% if not user.is_staff %}
     <li>
         <a href="#">My Learning</a>
     </li>
+    {% endif %}
     {% if user.is_tutor %}
     <li>
         <a href="#">My Teaching</a>
