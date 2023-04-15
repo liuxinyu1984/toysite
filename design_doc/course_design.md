@@ -16,7 +16,7 @@ Course 由每周一个 lecture 组成, 每个 lecture 由若干个 topic 组成
 
 - `subject`: e.g. 'MATH', 'ECON', 'STAT'
 - `course_number`: e.g. '101'
-- `year`: e.g. '2023'. 可由 admin 在学期初期创建课程, 自动获取 `created_at` 日期
+- `year`: e.g. '2023'. 可由 admin 在学期初期创建课程, 自动获取 `start_date` year
 - `term`: e.g. 'spring', 'fall', 'summer', 可由 `created_at` 自动获得
 - `section`: e.g. '103', '201', 'all' (代表不分 section 的课). Econ 等课程不同 section 区别较大需要区分
 - `instructor`: 为 `user` 类 object, 需要在学期初由 admin 手动添加
