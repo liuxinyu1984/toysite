@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import MyUser
 
+# form for sign-up view
 class MyUserCreationForm(UserCreationForm):
 
     class Meta:
@@ -11,6 +12,7 @@ class MyUserCreationForm(UserCreationForm):
         fields = ('username', 'email', 'wechat_id')
 
 
+# form for change user profile view
 class MyUserChangeForm(UserChangeForm):
 
     class Meta:
@@ -31,3 +33,5 @@ class MyUserChangeForm(UserChangeForm):
             'is_staff', 
             'is_active'
         )
+
+
