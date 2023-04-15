@@ -4,14 +4,7 @@ from django.contrib.auth.views import LoginView
 from .forms import MyUserCreationForm, MyUserChangeForm
 from django.urls import reverse_lazy
 
-# def base(request):
-#     return render(request, 'base.html', {})
 
-# def index(request):
-#     return render(request, 'index.html', {})
-
-# def join(request):
-#     return render(request, 'join.html', {})
 
 
 def register(request):
