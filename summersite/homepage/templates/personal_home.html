@@ -3,6 +3,22 @@
 
 {% block content %}
 
-<h1>This is your homepage,  {{ username }}</h1>
+<h1>Welcome back,  {{ username }}</h1>
+<ul>
+    <li>
+        <a href="#">My Learning</a>
+    </li>
+    {% if user.is_tutor %}
+    <li>
+        <a href="#">My Teaching</a>
+    </li>
+    {% endif %}
+    <li>
+        <a href="#">Announcement</a>
+    </li>
+    <li>
+        <a href="#">Profile</a>
+    </li>
+</ul>
 
 {% endblock %}
