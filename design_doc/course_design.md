@@ -38,7 +38,8 @@ Course 由每周一个 lecture 组成, 每个 lecture 由若干个 topic 组成
 - notes: PDF file. 以周为单位下载 notes
 - is_midterm: boolean field 表示是否 midterm review
 - is_final: boolean field 表示是否 final review
-- start date/end date: 便于计费, 以及 tutor 控制进度. start 默认为创建日期, end 默认为 start + 7天
+- created date: 创建日期
+- modified on: 修改日期
 - slug: course+week
 
 `lecture` model methods:

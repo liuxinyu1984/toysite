@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course
+from .models import Course, Lecture
 
 #admin.site.register(Course)
 
@@ -24,3 +24,14 @@ class CourseAdmin(admin.ModelAdmin):
     #search_fields = ['subject', 'instructor']
 
 admin.site.register(Course, CourseAdmin)
+
+
+class LectureAdmin(admin.ModelAdmin):
+
+    # def course_title(self):
+    #     return self.course.__str__()
+    
+    list_display = ('course', 'week', 'created_at', 'updated_at', 'is_midterm', 'is_final')
+    #prepopulated_fields = {"slug": ['course', 'week']}
+
+admin.site.register(Lecture, LectureAdmin)
