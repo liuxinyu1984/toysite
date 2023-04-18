@@ -64,3 +64,14 @@ Relation between 3 models/classes:
 
 - `lecture` object 可以脱离 course 单独存在, 可以反复使用
 - `topic` object 可以重复使用, 可以脱离 lecture
+
+## 6. Permissions
+
+Permissions on CRUD operations of `course`, `lecture`, `topic` on different types of users:
+
+| operations | student      | tutor                       | admin    |
+| ---------- | ------------ | --------------------------- | -------- |
+| Create     | none         | `lecture`, `topic` teaching | `course` |
+| Read       | all enrolled | all teaching                | all      |
+| Update     | none         | `lecture`,`topic` teaching  | `course` |
+| Delete     | none         | `lecture`, `topic` teaching | `course` |
