@@ -2,6 +2,16 @@
 
 ---
 
+## 0. Term
+
+Course 需要 term field, 包含 start_date, end_date. 管理员创建 course 时手动输入 start_date, end_date 太麻烦. 转而将时间 field 包装成 model `Term`:
+
+- fields of `Term`:
+  - `year`: CharField, 例如 2023
+  - `season`: CharField, "Fall", "Spring", "Summer_1", "Summer_2". Summer 分两个 term, 因为 start/end date 不同
+  - `start_date` and `end_date`: DateField, 每学年开学时知道学期开始和终止日期, 可以一年设置一次. End date 之后课程 material 下架
+- `Course` model 添加一个 ForeignKey 指向 `Term`, 每门课只有一个 term
+
 ## 1. Course-Lecture-Topic Structure
 
 Course 由每周一个 lecture 组成, 每个 lecture 由若干个 topic 组成
@@ -16,17 +26,11 @@ Course 由每周一个 lecture 组成, 每个 lecture 由若干个 topic 组成
 
 - `subject`: e.g. 'MATH', 'ECON', 'STAT'
 - `course_number`: e.g. '101'
-- `year`: e.g. '2023'. 可由 admin 在学期初期创建课程, 自动获取 `start_date` year
-- `term`: e.g. 'spring', 'fall', 'summer', 可由 `created_at` 自动获得
-- `section`: e.g. '103', '201', 'all' (代表不分 section 的课). Econ 等课程不同 section 区别较大需要区分
+- `term`: ForeignKey to `Term` class
+- `section`: e.g. '103', '201', 'all' (代表不分 section 的课). Econ 等课程不同 section 区别较大需要区分, 默认为 blank
 - `instructor`: 为 `user` 类 object, 需要在学期初由 admin 手动添加
-- `start_date`, `end_date`: 学期开始/结束日期. 结束日期后访问终止
-- `list_of_lectures`: lecture 列表 (`lecture` model 中用 ForeignKey 对应 `course`)
+- (deleted)`list_of_lectures`: lecture 列表 (`lecture` model 中用 ForeignKey 对应 `course`, query 即可找到 course 对应所有 lecture)
 - slug: subject+course_number+year+term+section
-
-`course` methods:
-
-- `get_all_lectures()`: return a list of all `lecture` objects associated to the course
 
 ## 3. Lecture
 
