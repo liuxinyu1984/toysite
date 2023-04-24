@@ -1,6 +1,41 @@
 from django.db import models
 from user.models import MyUser
 
+
+class Term(models.Model):
+
+    SEASON_CHOICES = [
+        ('SPRING', 'Spring'),
+        ('SUMMER_1', 'Summer_1'),
+        ('SUMMER_2', 'Summer_2'),
+        ('FALL', 'Fall'),
+    ]
+    year = models.CharField(
+        max_length=4,
+        help_text="Year of the term, e.g. 2023",
+        blank=False,
+        verbose_name='Year'
+    )
+    season = models.CharField(
+        max_length=8,
+        choices=SEASON_CHOICES,
+        help_text="Season of the term, e.g. Fall.",
+        blank=False,
+        verbose_name='Season'
+    )
+    start_date = models.DateField(
+        help_text="Start date of the term.",
+        verbose_name='Start Date'
+    )
+    end_date = models.DateField(
+        help_text="End date of the term.",
+        verbose_name='End Date'
+    )
+
+    def __str__(self):
+        return self.year + " " + self.season.capitalize()
+
+
 class Course(models.Model):
 
     SUBJECT_CHOICES = [
@@ -27,92 +62,79 @@ class Course(models.Model):
         ('WRDS', 'WRDS'),
     ]
 
-    TERM_CHOICES = [
-        ('SPRING', 'Spring'),
-        ('SUMMER', 'Summer'),
-        ('FALL', 'Fall'),
-    ]
-
     subject = models.CharField(
-        max_length = 4, 
-        choices = SUBJECT_CHOICES, 
-        help_text = "Subject code, e.g. ECON.", 
-        blank = False,
-        verbose_name = 'Subject'
-        )
+        max_length=4,
+        choices=SUBJECT_CHOICES,
+        help_text="Subject code, e.g. ECON.",
+        blank=False,
+        verbose_name='Subject'
+    )
     course_number = models.CharField(
-        max_length = 3, 
-        help_text = "3-digits course number, e.g. 101.", 
-        blank = False,
-        verbose_name = 'Course Number'
-        )
-    start_date = models.DateField(
-        help_text = "Starting date of the term.", 
-        verbose_name = 'Start Date'
-        )
-    end_date = models.DateField(
-        help_text = "End date of the term.", 
-        verbose_name = 'End Date')
-    term = models.CharField(
-        max_length = 6, 
-        choices = TERM_CHOICES, 
-        help_text = "Season of the term, e.g. Fall.", 
-        blank = False,
-        verbose_name = 'Term'
-        )
+        max_length=3,
+        help_text="3-digits course number, e.g. 101.",
+        blank=False,
+        verbose_name='Course Number'
+    )
     section = models.CharField(
-        max_length = 20, 
-        help_text = "Section number, e.g. 202 or professor name. <strong>Leave it blank</strong> if there is only one section.", 
-        blank = True,
-        verbose_name = 'Section'
-        )
+        max_length=20,
+        help_text="Section number, e.g. 202 or professor name. <strong>Leave it blank</strong> if there is only one section.",
+        blank=True,
+        verbose_name='Section'
+    )
+    term = models.ForeignKey(
+        Term,
+        models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name='Term'
+    )
     instructor = models.ForeignKey(
-        MyUser, 
+        MyUser,
+        models.SET_NULL,
         limit_choices_to={'is_tutor': True},
-        on_delete=models.CASCADE,
-        verbose_name = 'Instructor'
-        )
-    #slug = models.SlugField()
-
-    def course_year(self):
-        return self.start_date.strftime("%Y")
+        blank=True,
+        null=True,
+        verbose_name='Instructor'
+    )
+    # slug = models.SlugField()
 
     def __str__(self):
-        return self.subject + self.course_number + " - " + self.course_year() + self.term.lower() + self.section
+        return self.subject + self.course_number + " - " + self.section + self.term.__str__()
+
 
 class Lecture(models.Model):
     course = models.ForeignKey(
-        Course, 
-        on_delete = models.CASCADE,
-        help_text = "Select the course.",
-        verbose_name = 'Course'
-        )
+        Course,
+        on_delete=models.CASCADE,
+        help_text="Select the course.",
+        verbose_name='Course'
+    )
     week = models.PositiveIntegerField(
-        blank = False, 
-        help_text = 'Enter the week number.', 
-        verbose_name = 'Week No.'
-        )
+        blank=False,
+        help_text='Enter the week number.',
+        verbose_name='Week No.'
+    )
     syllabus = models.TextField(
-        blank = True,
-        help_text = "A short syllabus of this lecture."
+        blank=True,
+        help_text="A short syllabus of this lecture."
     )
     is_midterm = models.BooleanField(
-        default = False,
-        help_text = "Is this a midterm review lecture?",
-        verbose_name = 'Midterm Review?'
+        default=False,
+        help_text="Is this a midterm review lecture?",
+        verbose_name='Midterm Review?'
     )
     is_final = models.BooleanField(
-        default = False,
-        help_text = "Is this a final review lecture?",
-        verbose_name = "Final Review?"
+        default=False,
+        help_text="Is this a final review lecture?",
+        verbose_name="Final Review?"
     )
     created_at = models.DateTimeField(
-        auto_now_add = True,
-        verbose_name = 'Create Time'
+        auto_now_add=True,
+        verbose_name='Create Time'
     )
     updated_at = models.DateTimeField(
-        auto_now = True,
-        verbose_name = 'Update Time'
+        auto_now=True,
+        verbose_name='Update Time'
     )
     # slug = models.SlugField(
     #     default = "",
