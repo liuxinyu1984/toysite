@@ -27,7 +27,7 @@ class CourseAdmin(admin.ModelAdmin):
     )
     ordering = ['subject', 'course_number', 'instructor']
     list_filter = ('subject', 'instructor')
-    # search_fields = ['subject', 'instructor']
+    search_fields = ['subject', 'instructor__username']
 
 
 admin.site.register(Course, CourseAdmin)
