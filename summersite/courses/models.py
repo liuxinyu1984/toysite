@@ -147,3 +147,27 @@ class Lecture(models.Model):
 
     def __str__(self):
         return str(self.course) + "---Week" + str(self.week)
+
+
+class UploadNote(models.Model):
+    lecture = models.ForeignKey(
+        Lecture,
+        verbose_name='Lecture corresponds to the notes',
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(
+        max_length=100,
+        verbose_name='Title of notes',
+        help_text='e.g. Week 1 notes'
+    )
+    upload_time = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Upload time'
+    )
+    document = models.FileField(
+        upload_to='notes/',
+        verbose_name='Document to be uploaded'
+    )
+
+    def __str__(self):
+        return self.title
