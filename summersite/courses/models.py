@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import MyUser
+from django.utils.timezone import datetime
 
 
 class Term(models.Model):
@@ -97,6 +98,9 @@ class Course(models.Model):
         verbose_name='Instructor'
     )
     # slug = models.SlugField()
+
+    def is_active(self) -> bool:
+        return datetime.today().date() >= self.term.start_date and datetime.today().date() <= self.term.end_date
 
     def __str__(self):
         return self.subject + self.course_number + " - " + self.section + self.term.__str__()

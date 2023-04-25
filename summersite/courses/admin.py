@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Term, Course, Lecture
+from django.utils.timezone import datetime
 
 # admin.site.register(Course)
 
@@ -18,7 +19,11 @@ class CourseAdmin(admin.ModelAdmin):
     def course_title(self, obj):
         return obj.subject + " " + obj.course_number
 
-    list_display = ('course_title', 'term', 'section', 'instructor')
+    def is_active(self, obj):
+        return datetime.today().date() >= obj.term.start_date and datetime.today().date() <= obj.term.end_date
+
+    list_display = ('course_title', 'term', 'section',
+                    'instructor', 'is_active')
     # fields = ['subject', 'course_number', 'term', 'section', 'instructor', 'start_date', 'end_date']
     fieldsets = (
         ('Course', {'fields': ('subject', 'course_number', 'section')}),
