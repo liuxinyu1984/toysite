@@ -102,6 +102,9 @@ class Course(models.Model):
     def is_active(self) -> bool:
         return datetime.today().date() >= self.term.start_date and datetime.today().date() <= self.term.end_date
 
+    def get_title(self):
+        return self.subject + self.course_number + self.section
+
     def __str__(self):
         return self.subject + self.course_number + " - " + self.section + self.term.__str__()
 

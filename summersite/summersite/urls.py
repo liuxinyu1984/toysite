@@ -10,6 +10,7 @@ urlpatterns = [
     path('homepage/', include('homepage.urls')),
     path("users/", include("django.contrib.auth.urls")),
     path('users/', include('user.urls')),
+    path('teachings/', include('teachings.urls')),
 ]
 
 if settings.DEBUG:
