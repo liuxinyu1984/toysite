@@ -171,3 +171,27 @@ class UploadNote(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class UploadVideo(models.Model):
+    lecture = models.ForeignKey(
+        Lecture,
+        verbose_name='Lecture corresponds to the video',
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(
+        max_length=100,
+        verbose_name='Title of video',
+        help_text='e.g. Week 1 recording'
+    )
+    upload_time = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Upload time'
+    )
+    document = models.FileField(
+        upload_to='video/',
+        verbose_name='Video to be uploaded'
+    )
+
+    def __str__(self):
+        return self.title

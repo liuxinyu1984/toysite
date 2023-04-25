@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Term, Course, Lecture, UploadNote
+from .models import Term, Course, Lecture, UploadNote, UploadVideo
 from django.utils.timezone import datetime
 
 # admin.site.register(Course)
@@ -58,3 +58,12 @@ class UploadNoteAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UploadNote, UploadNoteAdmin)
+
+
+class UploadVideoAdmin(admin.ModelAdmin):
+    list_display = (
+        'lecture', 'title', 'upload_time'
+    )
+
+
+admin.site.register(UploadVideo, UploadVideoAdmin)
