@@ -9,7 +9,7 @@
     <ul>
         {% for course in my_courses %}
             <li>
-                <a href="#">{{ course.get_title }}</a>
+                <a href="{% url 'course_summary' course.id %}">{{ course.get_title }}</a>
             </li>
         {% endfor %}
     </ul>

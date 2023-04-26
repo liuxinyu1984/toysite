@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if course.instructor == user %}
+<h1>{{ course.get_title }}</h1>
+<ul>
+    {% for lecture in lectures %}
+        <li>
+            <a href="#">Week {{ lecture.week }}</a>
+            <ul>
+                <li>
+                    <strong>Syllabus</strong>
+                    <p>{{ lecture.syllabus }}</p>
+                </li>
+                <li>
+                    <strong>Notes</strong>
+                    {% for note in lecture.uploadnote_set.all %}
+                        <p>{{ note }}</p>
+                    {% endfor %}
+                </li>
+                <li>
+                    <strong>Videos</strong>
+                    {% for video in lecture.uploadvideo_set.all %}
+                        <p>{{ video }}</p>
+                    {% endfor %}
+                </li>
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+<ul>
+    
+    <a href="#">Create a new lecture</a>
+    
+</ul>
+{% else %}
+<h2>You are not the instructor of this course</h2>
+{% endif %}
+{% endblock %}
