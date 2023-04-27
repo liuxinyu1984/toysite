@@ -14,26 +14,27 @@
                     <p>{{ lecture.syllabus }}</p>
                 </li>
                 <li>
-                    <strong>Notes</strong>
+                    <strong>Notes</strong> <br>
                     {% for note in lecture.uploadnote_set.all %}
-                        <p>{{ note }}</p>
+                        <a href="{{ note.document.url }}" download="{{ note.document.url }}">Download {{ note.document }}</a> <br>
                     {% endfor %}
                 </li>
                 <li>
-                    <strong>Videos</strong>
+                    <strong>Videos</strong> <br>
                     {% for video in lecture.uploadvideo_set.all %}
-                        <p>{{ video }}</p>
+                        <video width="300" height="240" controls>
+                            <source src="{{ video.document.url }}" type="video/mp4">
+                            Your browser does not support video tag.
+                        </video>
                     {% endfor %}
                 </li>
             </ul>
         </li>
     {% endfor %}
 </ul>
-<ul>
-    
-    <a href="#">Create a new lecture</a>
-    
-</ul>
+<br>
+<br>
+<a href="#">Create a new lecture</a>
 {% else %}
 <h2>You are not the instructor of this course</h2>
 {% endif %}
