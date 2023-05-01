@@ -116,6 +116,12 @@ class Lecture(models.Model):
         help_text="Select the course.",
         verbose_name='Course'
     )
+    title = models.CharField(
+        max_length=300,
+        default='',
+        help_text='Enter the title of the lecture, e.g. Math101 Lecture 1.',
+        verbose_name='Title'
+    )
     week = models.PositiveIntegerField(
         blank=False,
         help_text='Enter the week number.',
