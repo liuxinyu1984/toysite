@@ -1,6 +1,9 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from courses.models import Course, Lecture, UploadNote, UploadVideo
+from django.views.generic.list import ListView
 
 
 @login_required(login_url="/users/login/")
@@ -29,3 +32,12 @@ def course_summary(request, course_id):
             'lectures': lectures,
         }
     )
+
+
+class ManageMyCourseListView(ListView):
+    model = Course
+    template_name = 'my_courses.html'
+
+    def get_queryset(self) -> QuerySet[Any]:
+        qs = super(ManageMyCourseListView, self).get_queryset()
+        return qs.filter(instructor=self.request.user)

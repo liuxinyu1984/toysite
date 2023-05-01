@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Welcome back, {{ user.username }}</h1>
+<ul>
+    {% if user.is_tutor %}
+    <h2>All courses taught by me:</h2>
+    <ul>
+        {% for course in object_list %}
+        <li>
+            <a href="{% url 'course_summary' course.id %}">{{ course.get_title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>You are not an instructor!</p>
+    {% endif %}
+</ul>
+
+{% endblock %}
