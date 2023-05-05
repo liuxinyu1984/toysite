@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from courses.models import Course, Lecture, UploadNote, UploadVideo
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 
 @login_required(login_url="/users/login/")
@@ -41,3 +42,8 @@ class ManageMyCourseListView(ListView):
     def get_queryset(self) -> QuerySet[Any]:
         qs = super(ManageMyCourseListView, self).get_queryset()
         return qs.filter(instructor=self.request.user)
+
+
+class InstructorCourseDetailView(DetailView):
+    model = Course
+    template_name = 'course_detail.html'

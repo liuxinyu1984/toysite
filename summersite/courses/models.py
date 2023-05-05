@@ -155,7 +155,7 @@ class Lecture(models.Model):
     # )
 
     def __str__(self):
-        return str(self.course) + "---Week" + str(self.week)
+        return str(self.course) + self.title
 
 
 class UploadNote(models.Model):

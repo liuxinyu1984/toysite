@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if course.instructor == user %}
+<h1>{{ course.get_title }}</h1>
+<ul>
+    <li>
+        <strong>Term:</strong> {{ course.term }}
+    </li>
+    <li>
+        <strong>Tutor:</strong> {{ course.instructor }}
+    </li>
+    <li>
+        <strong>Is the course active?:</strong> {{ course.is_active }}
+    </li>
+</ul>
+<br>
+<br>
+<a href="#">Create a new lecture</a>
+<br>
+<br>
+<h2>List of lectures</h2>
+<ul>
+    {% for lecture in course.lecture_set.all %}
+        <li>
+            {{ lecture.title }}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<h2>You are not the instructor of this course</h2>
+{% endif %}
+{% endblock %}
