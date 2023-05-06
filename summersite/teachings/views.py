@@ -68,8 +68,8 @@ class LectureDetail(DetailView):
 class CreateLectureView(CreateView):
     model = Lecture
     template_name = 'create_lecture.html'
-    fields = '__all__'
-    # form_class = CreateLectureForm
+    # fields = '__all__'
+    form_class = CreateLectureForm
 
     def get_initial(self):
         return {'course': Course.objects.get(id=self.kwargs['course_id'])}
