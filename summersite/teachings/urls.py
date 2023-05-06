@@ -8,7 +8,7 @@ urlpatterns = [
          views.CourseDetail.as_view(), name='course_detail'),
     path('<int:course_id>/<int:lecture_id>/lecture_detail',
          views.LectureDetail.as_view(), name='lecture_detail'),
-    path('<int:course_id>/create_lecture/',
+    path('create_lecture/<int:course_id>',
          views.CreateLectureView.as_view(), name='create_lecture'),
     path('update_lecture/<int:pk>',
          views.UpdateLectureView.as_view(), name='update_lecture')
