@@ -22,3 +22,14 @@ class CreateNoteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateNoteForm, self).__init__(*args, **kwargs)
         self.fields['lecture'].disabled = True
+
+
+class CreateVideoForm(forms.ModelForm):
+
+    class Meta:
+        model = UploadVideo
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(CreateVideoForm, self).__init__(*args, **kwargs)
+        self.fields['lecture'].disabled = True

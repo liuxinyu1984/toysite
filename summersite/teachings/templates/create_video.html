@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Create Video
+{% endblock %}
+{% block content %}
+
+<h1>Create New Video</h1>
+<form action="{% url 'create_video' lecture_id %}" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create">
+</form>
+
+{% endblock %}

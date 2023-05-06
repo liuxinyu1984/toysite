@@ -79,7 +79,7 @@ Lecture Detail
     </p>
     {% endif %}
     <p>
-        <a href="#">Upload New Videos</a>
+        <a href="{% url 'create_video' lecture.id %}">Upload New Videos</a>
     </p> 
 </div>
 {% else %}
