@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
+{% block title %}
+Lecture Detail
+{% endblock %}
 {% block content %}
 
 {% if lecture.course.instructor == user %}
@@ -21,7 +23,7 @@
         </li>
     </ul>
     <p>
-        <a href="#">Edit Lecture</a> | <a href="#">Delete Lecture</a>
+        <a href="{% url 'update_lecture' lecture.id %}">Edit Lecture</a> | <a href="#">Delete Lecture</a>
     </p>
 </div>
 <br>

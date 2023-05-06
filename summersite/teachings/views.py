@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from courses.models import Course, Lecture, UploadNote, UploadVideo
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .forms import CreateLectureForm
 
 
@@ -80,3 +80,9 @@ class CreateLectureView(CreateView):
     #     lecture.course = Course.objects.all().filter(
     #         pk=self.kwargs['course_id'])
     #     return super(CreateLectureView, self).form_valid(form)
+
+
+class UpdateLectureView(UpdateView):
+    model = Lecture
+    template_name = 'update_lecture.html'
+    fields = ['title', 'week', 'syllabus', 'is_midterm', 'is_final']
