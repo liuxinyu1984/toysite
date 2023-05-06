@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Video
+{% endblock %}
+{% block content %}
+
+<h1>Update Video</h1>
+<form action="{% url 'update_video' uploadvideo.pk %}" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update">
+</form>
+
+{% endblock %}

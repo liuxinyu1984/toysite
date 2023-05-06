@@ -141,3 +141,20 @@ class CreateVideoView(CreateView):
 
     def get_initial(self):
         return {'lecture': Lecture.objects.get(id=self.kwargs['lecture_id'])}
+
+
+class UpdateVideoView(UpdateView):
+    model = UploadVideo
+    template_name = 'update_video.html'
+    fields = ['title', 'document']
+
+
+class DeleteVideoView(DeleteView):
+    model = UploadVideo
+    template_name = 'delete_video.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('lecture_detail', kwargs={
+            'course_id': self.object.lecture.course.id,
+            'lecture_id': self.object.lecture.id
+        })

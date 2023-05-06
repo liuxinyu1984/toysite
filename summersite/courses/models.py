@@ -221,5 +221,8 @@ class UploadVideo(models.Model):
     def __str__(self):
         return self.title
 
+    def get_short_title(self):
+        return self.title
+
     def get_absolute_url(self):
         return reverse('lecture_detail', args=[str(self.lecture.course.id), str(self.lecture.id)])

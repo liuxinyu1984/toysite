@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Delete Video
+{% endblock %}
+{% block content %}
+
+<h1>Delete Video</h1>
+<br>
+<h3>Delete: {{ object.get_short_title }}</h3>
+<form method="post">
+    {% csrf_token %}
+    <strong>Are you sure?</strong>
+    <br>
+    <input type="submit" value="Delete">
+</form>
+
+{% endblock %}

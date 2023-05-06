@@ -63,7 +63,9 @@ Lecture Detail
     <ul>
         {% for video in lecture.uploadvideo_set.all %}
         <li>
-            <strong>{{ video.title }}</strong> | <a href="#">Edit Video</a> | <a href="#">Delete Video</a>
+            <strong>{{ video.title }}</strong> | 
+            <a href="{% url 'update_video' video.id %}">Edit Video</a> | 
+            <a href="{% url 'delete_video' video.id %}">Delete Video</a>
             <div class="video-container">
                 <video width="300" height="240" controls>
                     <source src="{{ video.document.url }}" type="video/mp4">

@@ -22,4 +22,8 @@ urlpatterns = [
          views.DeleteNoteView.as_view(), name='delete_note'),
     path('create_video/<int:lecture_id>',
          views.CreateVideoView.as_view(), name='create_video'),
+    path('update_video/<int:pk>',
+         views.UpdateVideoView.as_view(), name='update_video'),
+    path('delete_video/<int:pk>',
+         views.DeleteVideoView.as_view(), name='delete_video'),
 ]
