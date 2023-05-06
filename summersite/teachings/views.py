@@ -7,6 +7,7 @@ from courses.models import Course, Lecture, UploadNote, UploadVideo
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from .forms import CreateLectureForm
 
 
 # @login_required(login_url="/users/login/")
@@ -68,3 +69,14 @@ class CreateLectureView(CreateView):
     model = Lecture
     template_name = 'create_lecture.html'
     fields = '__all__'
+    # form_class = CreateLectureForm
+
+    def get_initial(self):
+        return {'course': Course.objects.get(id=self.kwargs['course_id'])}
+
+    # def form_valid(self, form):
+    #     print(self.request)
+    #     lecture = form.save(commit=False)
+    #     lecture.course = Course.objects.all().filter(
+    #         pk=self.kwargs['course_id'])
+    #     return super(CreateLectureView, self).form_valid(form)

@@ -8,5 +8,6 @@ urlpatterns = [
          views.CourseDetail.as_view(), name='course_detail'),
     path('<int:course_id>/<int:lecture_id>/lecture_detail',
          views.LectureDetail.as_view(), name='lecture_detail'),
-    path('create_lecture/', views.CreateLectureView.as_view(), name='create_lecture'),
+    path('<int:course_id>/create_lecture/',
+         views.CreateLectureView.as_view(), name='create_lecture'),
 ]
