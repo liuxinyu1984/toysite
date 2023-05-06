@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import MyUser
 from django.utils.timezone import datetime
+from django.urls import reverse
 
 
 class Term(models.Model):
@@ -162,6 +163,9 @@ class Lecture(models.Model):
 
     def __str__(self):
         return str(self.course) + " Week" + str(self.week) + "---" + self.title
+
+    def get_absolute_url(self):
+        return reverse('lecture_detail', args=[str(self.course.id), str(self.id)])
 
 
 class UploadNote(models.Model):
