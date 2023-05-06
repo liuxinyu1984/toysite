@@ -44,16 +44,23 @@ Course Detail
                 </li>
                 <li>
                     <strong>Notes: </strong>
+                    {% if lecture.uploadnote_set.all %}
                     <ul>
                         {% for note in lecture.uploadnote_set.all %}
                             <li>
-                                <a href="{{ note.document.url }}" download="{{ note.document.url }}">Download {{ note.document }}</a>
+                                Download Notes: <a href="{{ note.document.url }}" download="{{ note.document.url }}">{{ note.title }}</a>
                             </li>
                         {% endfor %}
                     </ul>
+                    {% else %}
+                        <p>
+                            You don't have any notes uploaded yet.
+                        </p>
+                    {% endif %}
                 </li>
                 <li>
                     <strong>Videos: </strong>
+                    {% if lecture.uploadvideo_set.all %}
                     <ul>
                         {% for video in lecture.uploadvideo_set.all %}
                             <li>
@@ -64,6 +71,11 @@ Course Detail
                             </li>
                         {% endfor %}
                     </ul>
+                    {% else %}
+                    <p>
+                        You don't have any videos uploaded yet.
+                    </p>
+                    {% endif %}
                 </li>
             </ul>
         </div>

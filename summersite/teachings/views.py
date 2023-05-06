@@ -7,7 +7,7 @@ from courses.models import Course, Lecture, UploadNote, UploadVideo
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import CreateLectureForm
+from .forms import CreateLectureForm, CreateNoteForm
 from django.urls import reverse_lazy
 
 
@@ -96,3 +96,23 @@ class DeleteLectureView(DeleteView):
     def get_success_url(self) -> str:
         return reverse_lazy('course_detail', kwargs={
             'course_id': self.object.course.id})
+
+
+class CreateNoteView(CreateView):
+    model = UploadNote
+    template_name = 'create_document.html'
+    form_class = CreateNoteForm
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["lecture_id"] = self.kwargs['lecture_id']
+        return context
+
+    def get_initial(self):
+        return {'lecture': Lecture.objects.get(id=self.kwargs['lecture_id'])}
+
+
+class UpdateNoteView(UpdateView):
+    model = UploadNote
+    template_name = 'update_document.html'
+    fields = ['title', 'document']

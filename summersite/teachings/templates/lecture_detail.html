@@ -37,23 +37,29 @@ Lecture Detail
 <br>
 <div class="container">
     <h2>Lecture Notes</h2>
+    {% if lecture.uploadnote_set.all %}
     <ul>
         {% for note in lecture.uploadnote_set.all %}
             <li>
                 Download <a href="{{ note.document.url }}" download="{{ note.document.url }}">{{ note.title }}</a> | 
-                <a href="#">Edit Notes</a> | 
+                <a href="{% url 'update_note' note.id %}">Edit Notes</a> | 
                 <a href="#">Delete Notes</a>
             </li>
         {% endfor %}
     </ul>
+    {% else %}
     <p>
-        <a href="#">Upload New Notes</a>
+        You don't have any note uploaded yet.
+    </p>
+    {% endif %}
+    <p>
+        <a href="{% url 'create_note' lecture.id %}">Upload New Notes</a>
     </p>
 </div>
 <br>
 <div class="container">
     <h2>Video Recordings of Lecture</h2>
-    
+    {% if lecture.uploadvideo_set.all %}
     <ul>
         {% for video in lecture.uploadvideo_set.all %}
         <li>
@@ -67,6 +73,11 @@ Lecture Detail
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p>
+        You don't have any video uploaded yet.
+    </p>
+    {% endif %}
     <p>
         <a href="#">Upload New Videos</a>
     </p> 
