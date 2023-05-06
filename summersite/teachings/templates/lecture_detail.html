@@ -21,9 +21,17 @@ Lecture Detail
             <strong>Syllabus:</strong> <br>
             <p>{{ lecture.syllabus }}</p>
         </li>
+        <li>
+            <strong>Is this a midterm review lecture:</strong> <br>
+            <p>{{ lecture.is_midterm }}</p>
+        </li>
+        <li>
+            <strong>Is this a final review lecture:</strong> <br>
+            <p>{{ lecture.is_final }}</p>
+        </li>
     </ul>
     <p>
-        <a href="{% url 'update_lecture' lecture.id %}">Edit Lecture</a> | <a href="#">Delete Lecture</a>
+        <a href="{% url 'update_lecture' lecture.id %}">Edit Lecture</a> | <a href="{% url 'delete_lecture' lecture.id %}">Delete Lecture</a>
     </p>
 </div>
 <br>

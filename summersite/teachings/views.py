@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from courses.models import Course, Lecture, UploadNote, UploadVideo
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import CreateLectureForm
+from django.urls import reverse_lazy
 
 
 # @login_required(login_url="/users/login/")
@@ -86,3 +87,12 @@ class UpdateLectureView(UpdateView):
     model = Lecture
     template_name = 'update_lecture.html'
     fields = ['title', 'week', 'syllabus', 'is_midterm', 'is_final']
+
+
+class DeleteLectureView(DeleteView):
+    model = Lecture
+    template_name = 'delete_lecture.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('course_detail', kwargs={
+            'course_id': self.object.course.id})

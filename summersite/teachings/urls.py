@@ -11,5 +11,7 @@ urlpatterns = [
     path('create_lecture/<int:course_id>',
          views.CreateLectureView.as_view(), name='create_lecture'),
     path('update_lecture/<int:pk>',
-         views.UpdateLectureView.as_view(), name='update_lecture')
+         views.UpdateLectureView.as_view(), name='update_lecture'),
+    path('delete_lecture/<int:pk>',
+         views.DeleteLectureView.as_view(), name='delete_lecture'),
 ]
