@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if lecture.course.instructor == user %}
+<div class="container">
+    <h2>Lecture Information</h2>
+    <ul>
+        <li>
+            <strong>Course:</strong> {{ lecture.course.get_short_title }}
+        </li>
+        <li>
+            <strong>Week No.:</strong> {{ lecture.week }}
+        </li>
+        <li>
+            <strong>Title:</strong> {{ lecture.title }}
+        </li>
+        <li>
+            <strong>Syllabus:</strong> <br>
+            <p>{{ lecture.syllabus }}</p>
+        </li>
+    </ul>
+    <p>
+        <a href="#">Edit Lecture</a> | <a href="#">Delete Lecture</a>
+    </p>
+</div>
+<br>
+<div class="container">
+    <h2>Lecture Notes</h2>
+    <ul>
+        {% for note in lecture.uploadnote_set.all %}
+            <li>
+                Download <a href="{{ note.document.url }}" download="{{ note.document.url }}">{{ note.title }}</a> | 
+                <a href="#">Edit Notes</a> | 
+                <a href="#">Delete Notes</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <p>
+        <a href="#">Upload New Notes</a>
+    </p>
+</div>
+<br>
+<div class="container">
+    <h2>Video Recordings of Lecture</h2>
+    
+    <ul>
+        {% for video in lecture.uploadvideo_set.all %}
+        <li>
+            <strong>{{ video.title }}</strong> | <a href="#">Edit Video</a> | <a href="#">Delete Video</a>
+            <div class="video-container">
+                <video width="300" height="240" controls>
+                    <source src="{{ video.document.url }}" type="video/mp4">
+                    Your browser does not support video tag.
+                </video>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>
+        <a href="#">Upload New Videos</a>
+    </p> 
+</div>
+{% else %}
+<div class="container">
+    <h2>You are not the instructor of this course!</h2>
+</div>
+{% endif %}
+<div class="container">
+    <a href="{% url 'course_detail' lecture.course.id %}">Back to the course</a>
+</div>
+{% endblock %}

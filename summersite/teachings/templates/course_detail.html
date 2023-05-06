@@ -3,7 +3,12 @@
 {% block content %}
 
 {% if course.instructor == user %}
-<h1>{{ course.get_title }}</h1>
+<div class="container">
+<h1>{{ course.get_long_title }}</h1>
+</div>
+<br>
+<div class="container">
+<h2>Course Information</h2>
 <ul>
     <li>
         <strong>Term:</strong> {{ course.term }}
@@ -15,20 +20,59 @@
         <strong>Is the course active?:</strong> {{ course.is_active }}
     </li>
 </ul>
+</div>
 <br>
+<div class="container">
+    <h2>Create a New Lecture</h2> <br>
+    <div class="container">
+        <a href="#">Create a new lecture</a>
+    </div>
+</div>
 <br>
-<a href="#">Create a new lecture</a>
-<br>
-<br>
-<h2>List of lectures</h2>
+<div class="container">
+<h2>View Exsiting Lectures</h2>
 <ul>
     {% for lecture in course.lecture_set.all %}
-        <li>
-            {{ lecture.title }}
-        </li>
+    <li>
+        <div class="container">
+            <p> <strong>Week{{ lecture.week }}---{{ lecture.title }}</strong> <a href="{% url 'lecture_detail' course.id lecture.id %}">View/Edit/Delete Lecture</a></p>
+            <ul>
+                <li>
+                    <strong>Syllabus:</strong> {{ lecture.syllabus }}
+                </li>
+                <li>
+                    <strong>Notes: </strong>
+                    <ul>
+                        {% for note in lecture.uploadnote_set.all %}
+                            <li>
+                                <a href="{{ note.document.url }}" download="{{ note.document.url }}">Download {{ note.document }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                    <strong>Videos: </strong>
+                    <ul>
+                        {% for video in lecture.uploadvideo_set.all %}
+                            <li>
+                                <video width="300" height="240" controls>
+                                    <source src="{{ video.document.url }}" type="video/mp4">
+                                    Your browser does not support video tag.
+                                </video>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </li>
     {% endfor %}
 </ul>
+</div>
 {% else %}
 <h2>You are not the instructor of this course</h2>
 {% endif %}
+<div class="container">
+    <a href="{% url 'my_teaching_courses' %}">Back to my courses</a>
+</div>
 {% endblock %}

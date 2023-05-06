@@ -102,8 +102,11 @@ class Course(models.Model):
     def is_active(self) -> bool:
         return datetime.today().date() >= self.term.start_date and datetime.today().date() <= self.term.end_date
 
-    def get_title(self):
+    def get_short_title(self):
         return self.subject + self.course_number + self.section
+
+    def get_long_title(self):
+        return self.subject + self.course_number + self.section + "---" + self.term.__str__()
 
     def __str__(self):
         return self.subject + self.course_number + " - " + self.section + self.term.__str__()
@@ -154,8 +157,11 @@ class Lecture(models.Model):
     #     null = True
     # )
 
+    def get_short_title(self):
+        return "Week" + str(self.week) + "---" + self.title
+
     def __str__(self):
-        return str(self.course) + self.title
+        return str(self.course) + " Week" + str(self.week) + "---" + self.title
 
 
 class UploadNote(models.Model):
