@@ -116,3 +116,14 @@ class UpdateNoteView(UpdateView):
     model = UploadNote
     template_name = 'update_document.html'
     fields = ['title', 'document']
+
+
+class DeleteNoteView(DeleteView):
+    model = UploadNote
+    template_name = 'delete_document.html'
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('lecture_detail', kwargs={
+            'course_id': self.object.lecture.course.id,
+            'lecture_id': self.object.lecture.id
+        })

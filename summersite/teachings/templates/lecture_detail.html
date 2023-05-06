@@ -43,7 +43,7 @@ Lecture Detail
             <li>
                 Download <a href="{{ note.document.url }}" download="{{ note.document.url }}">{{ note.title }}</a> | 
                 <a href="{% url 'update_note' note.id %}">Edit Notes</a> | 
-                <a href="#">Delete Notes</a>
+                <a href="{% url 'delete_note' note.id %}">Delete Notes</a>
             </li>
         {% endfor %}
     </ul>
